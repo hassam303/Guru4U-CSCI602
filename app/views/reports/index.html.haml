@@ -1,0 +1,8 @@
+- provide(:title, "Dashboard")
+%h1 #{@student.name}'s Mentees
+.centered
+  = datagrid_table @grid
+  = paginate(@grid.assets)
+  = bootstrap_form_tag url: new_report_path, method: :get do |f|
+    = f.form_group do
+      = f.primary "New Report", id: "new_report_button", method: :get, style: 'margin-top:20px;'

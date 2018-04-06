@@ -1,0 +1,11 @@
+- provide(:title, "Edit user settings")
+- provide(:button_text, "Update User")
+- if current_user.admin
+  - provide(:delete_button_text, "Delete User")
+%h1 Edit user settings
+.row
+  .col-md-6.col-md-offset-3
+    = render 'form'
+    .gravatar_edit
+      = gravatar_for @user
+      %a{:href => "http://gravatar.com/emails", :rel => "noopener", :target => "_blank"} change

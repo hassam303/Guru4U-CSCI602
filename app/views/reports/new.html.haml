@@ -1,0 +1,13 @@
+- provide(:title, 'New Mentor Report')
+%h1 New Mentor Report
+.row
+  .col-md-6.col-md-offset-3
+    = bootstrap_form_for(@report) do |f|
+      = label :report, :mentee, 'Mentee'
+      = select_tag 'report[mentee]', options_for_select(Student.all_mentees(current_user)), id: 'report_mentee_select'
+      = f.text_field :title, id: 'report_title_field'
+      = f.text_area :message, id: 'report_message_area'
+      = f.form_group do
+        = f.check_box :urgent, id: 'report_urgent_checkbox', label: "Urgent?", inline: true
+      = f.form_group class: 'centered' do
+        = f.primary 'Submit', id: 'report_submit_button'

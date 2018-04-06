@@ -1,0 +1,15 @@
+= bootstrap_form_for(@student) do |f|
+    = f.text_field :name, id: 'student_name_field'
+    = f.text_field :cwid, id: 'student_cwid_field'
+    = f.email_field :email, id: 'student_email_field'
+    = f.telephone_field :phone, placeholder: '(xxx) xxx-xxxx', value: number_to_phone(@student.phone, area_code: true), id: 'student_phone_field'
+    = label :student, :company, 'Company'
+    = select_tag 'student[company]', options_for_select(Student::VALID_COMPANIES.sort,@student.company), id: 'student_company_select'
+    = label :student, :role, 'Role'
+    = select_tag 'student[role]', options_for_select(Student::VALID_ROLES,@student.role || Student::UNASSIGNED), id: 'student_role_select'
+    = label :student, :advisor, 'Advisor'
+    = select_tag 'student[advisor]', options_for_select(User.all_advisors(),@student.advisor), id: 'student_advisor_select'
+    = label :student, :mentor, 'Mentor'
+    = select_tag 'student[mentor]', options_for_select(Student.all_mentors(), @student.mentor&.name || Student::UNASSIGNED), id: 'student_mentor_select'
+    = f.form_group class: 'centered' do
+        = f.primary yield(:button_text), id: "#{yield(:button_text).parameterize(separator: '_')}_button"

@@ -1,0 +1,8 @@
+- provide(:title, 'Manage users')
+%h1 Manage users
+.centered
+  = datagrid_table @grid
+  = paginate(@grid.assets)
+  = bootstrap_form_tag url: new_user_path, method: :get do |f|
+    = f.form_group do
+      = f.primary "Add new user", id: "new_users_button", method: :get, style: 'margin-top:20px;'

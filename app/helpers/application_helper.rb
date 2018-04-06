@@ -1,0 +1,45 @@
+module ApplicationHelper
+  # Returns the full title on a per-page basis.
+  def full_title(page_title = '')
+    base_title = "Guru4u"
+    if page_title.empty?
+      base_title
+    else
+      page_title + " | " + base_title
+    end
+  end
+  
+  def end_with_period(sentence)
+    s = sentence
+    unless s.blank?
+      s.strip!
+      unless s.blank?
+        if !['!','?','.'].include?(s[-1])
+          s += '.'
+        end
+      end
+    end
+    s
+  end
+
+  def render_flash
+    flash_array = []
+    flash.each do |type, messages|
+      if messages.is_a?(String)
+        flash_array << 
+          render(
+            partial: 'shared/flash', 
+            locals: { :type => type, :text => end_with_period(messages)}) unless messages.blank?
+      else
+        messages.each do |m|
+          flash_array << 
+            render(
+              partial: 'shared/flash', 
+              locals: { :type => type, :text => end_with_period(m) }) unless m.blank?
+        end
+      end
+    end
+   
+    flash_array.join('').html_safe
+  end
+end

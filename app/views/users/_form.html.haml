@@ -1,0 +1,15 @@
+= bootstrap_form_for(@user) do |f|
+  = f.text_field :name, id: 'name_field'
+  = f.email_field :email, id: 'email_field'
+  = f.telephone_field :phone_number, placeholder: '(xxx) xxx-xxxx', value: number_to_phone(@user.phone_number, area_code: true), id: 'telephone_field'
+  = f.password_field :password, id: 'password_field'
+  = f.password_field :password_confirmation, id: 'password_confirmation_field'
+  - if current_user.admin
+    = f.form_group do
+      = f.check_box :admin, id: 'admin_checkbox', label: "Administrator?", inline: true
+      = f.check_box :disabled, id: 'disable_account_checkbox', label: "Disabled?", inline: true
+      = f.check_box :force_password_reset, id: 'force_password_reset_checkbox', label: "Force password reset?", inline: true
+  = f.form_group class: 'centered' do
+    = f.primary yield(:button_text), id: "#{yield(:button_text).parameterize(separator: '_')}_button"
+    - unless yield(:delete_button_text).blank?
+      = f.submit yield(:delete_button_text), id: "#{yield(:delete_button_text).parameterize(separator: '_')}_button", name: "delete", class: "btn btn-danger", data: { confirm: 'Are you sure?' }

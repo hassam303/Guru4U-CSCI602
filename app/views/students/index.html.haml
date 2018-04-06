@@ -1,0 +1,8 @@
+- provide(:title, "Dashboard")
+%h1 Dashboard
+.centered
+  = datagrid_table @grid
+  = paginate(@grid.assets)
+  = bootstrap_form_tag url: new_student_path, method: :get do |f|
+    = f.form_group do
+      = f.primary "Add new student", id: "new_student_button", method: :get, style: 'margin-top:20px;'

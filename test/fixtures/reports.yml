@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  mentee: MyString
+  title: MyString
+  message: MyText
+  urgent: false
+
+two:
+  mentee: MyString
+  title: MyString
+  message: MyText
+  urgent: false
